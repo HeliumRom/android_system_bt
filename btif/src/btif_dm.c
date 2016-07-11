@@ -612,7 +612,8 @@ static void bond_state_changed(bt_status_t status, bt_bdaddr_t *bd_addr, bt_bond
         bdcpy(pairing_cb.bd_addr, bd_addr->address);
     } else {
         if ((!pairing_cb.sdp_attempts)&&
-            (bdcmp(bd_addr->address, pairing_cb.bd_addr) == 0))
+            ((bdcmp(bd_addr->address, pairing_cb.bd_addr) == 0) ||
+             (bdcmp(bd_addr->address, pairing_cb.static_bdaddr.address) == 0)))
             memset(&pairing_cb, 0, sizeof(pairing_cb));
         else
             BTIF_TRACE_DEBUG("%s: BR-EDR service discovery active", __func__);
@@ -2727,7 +2728,7 @@ bt_status_t btif_dm_pin_reply( const bt_bdaddr_t *bd_addr, uint8_t accept,
                                uint8_t pin_len, bt_pin_code_t *pin_code)
 {
     BTIF_TRACE_EVENT("%s: accept=%d", __FUNCTION__, accept);
-    if (pin_code == NULL)
+    if (pin_code == NULL || pin_len > PIN_CODE_LEN)
         return BT_STATUS_FAIL;
 #if (defined(BLE_INCLUDED) && (BLE_INCLUDED == TRUE))
 

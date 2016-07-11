@@ -155,10 +155,6 @@
 #define BTA_AV_RET_TOUT 15
 #endif
 
-#ifndef PORCHE_PAIRING_CONFLICT
-#define PORCHE_PAIRING_CONFLICT  TRUE
-#endif
-
 #ifndef BTA_AV_CO_CP_SCMS_T
 #define BTA_AV_CO_CP_SCMS_T  FALSE
 #endif
@@ -534,7 +530,7 @@
 
 /* The number of security records for services. */
 #ifndef BTM_SEC_MAX_SERVICE_RECORDS
-#define BTM_SEC_MAX_SERVICE_RECORDS 32
+#define BTM_SEC_MAX_SERVICE_RECORDS 64
 #endif
 
 /* If True, force a retrieval of remote device name for each bond in case it's changed */
